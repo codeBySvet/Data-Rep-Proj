@@ -26,7 +26,7 @@ class App extends Component {
         <div className="App">
 
           {/* Setting up navbar */}
-          <Navbar bg="primary" variant="dark">
+          <Navbar bg="dark" variant="dark">
             
             {/* Naming navbar icon and assigning the URL to load when clicked */}
             <Navbar.Brand href="/">Navbar</Navbar.Brand>
