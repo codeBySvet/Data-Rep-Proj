@@ -1,6 +1,7 @@
 import React from "react";
 import { Songs } from "./songs";
-import axios from 'axios'
+import axios from 'axios';
+import Button from "react-bootstrap/Button";
 
 export class Read extends React.Component {
 
@@ -8,6 +9,7 @@ export class Read extends React.Component {
     constructor(){
         super();
         this.ReloadPage=this.ReloadPage.bind(this);
+        // this.SortPage=this.SortPage.bind(this);
     }
 
     //State acts as a holder of data which is linked to a specific component
@@ -15,6 +17,8 @@ export class Read extends React.Component {
         //Json collection of songs
         songs: []
     }
+
+    
 
     //Lifecycle hook, which gets called every time the component is mounted (active in the view)
     componentDidMount(){
@@ -26,6 +30,19 @@ export class Read extends React.Component {
             console.log(error)
         });
     }
+
+    // SortPage(){
+    //     axios.get('http://localhost:4000/api/songs/sort')
+    //     .then((response)=>{
+    //        console.log(response.data)
+    //         var newArr = response.toArray();
+    //         //console.log(newArr)
+    //     this.setState({ songs: response.data})
+    //     })
+    //     .catch((error)=>{
+    //     console.log("error test")
+    //     });
+    // }
 
 
     ReloadPage(){
@@ -41,10 +58,11 @@ export class Read extends React.Component {
     render() {
         return (
             <div>
-                <h1>This is the read component</h1>
 
-                <br/>
-                <br/>
+                <h1>Music Library</h1>
+                {/* Adding the delete button and linking to function
+                <Button  variant="primary" onClick={this.SortPage}>Sort</Button> */}
+
 
                 {/* Calling songs.js component  */}
                 {/* Also passing it down the state data  */}

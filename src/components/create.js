@@ -26,10 +26,10 @@ export class Create extends React.Component {
     //This event prevents any button on the form being called multiple times unintentionally
     onSubmit(e) {
         e.preventDefault();
-        alert("Movie: " + this.state.Title + this.state.Year +this.state.Type + this.state.Cover)
+        
 
         //Creating an object which will contain the data being sent up to the server
-        const newSong={
+        const newSong = {
             Title: this.state.Title,
             Year: this.state.Year,
             Type: this.state.Type,
@@ -37,13 +37,13 @@ export class Create extends React.Component {
         }
         //Posting the object up to the server
         axios.post('http://localhost:4000/api/songs', newSong)
-        .then((res)=>{
-            console.log(res)
-            console.log(newSong)
-        })
-        .catch((err)=>{
-            console.log(err)
-        });
+            .then((res) => {
+                console.log(res)
+                console.log(newSong)
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     }
 
     //This event will handle adding the inputted song name to the components state
@@ -59,13 +59,13 @@ export class Create extends React.Component {
         });
     }
     //This event will handle adding the inputted song type to the components state
-    onChangeType(e){
+    onChangeType(e) {
         this.setState({
             Type: e.target.value
         });
     }
     //This event will handle adding the inputted song cover art link to the components state
-    onChangeCover(e){
+    onChangeCover(e) {
         this.setState({
             Cover: e.target.value
         });
@@ -74,7 +74,7 @@ export class Create extends React.Component {
     render() {
         return (
             <div className='App'>
-
+                <h1>Add a New Track to your Library</h1>
                 {/* Creating a form for adding a new song */}
                 <form onSubmit={this.onSubmit}>
 
@@ -120,8 +120,6 @@ export class Create extends React.Component {
                             value='Add song'
                             className='btn btn-primary'></input>
                     </div>
-
-
                 </form>
             </div>
         );

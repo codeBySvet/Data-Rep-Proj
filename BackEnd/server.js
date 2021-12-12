@@ -3,6 +3,11 @@ const app = express()
 const port = 4000
 const mongoose = require('mongoose');
 
+
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
+
 //Body Parser is needed to parse through any given http POST body
 const bodyParser = require("body-parser");
 //Cors is needed because without it, we wont be able to request resources outside the server domain
@@ -21,12 +26,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //parse application/json
 app.use(bodyParser.json())
 
-
 //Connecting to the Mongoose database
 const myConnectionString = 'mongodb+srv://svetlinN:anshlom4321@projectdatabase.s7b7w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
 main().catch(err => console.log(err));
-
 async function main() {
   await mongoose.connect(myConnectionString);
 }
@@ -55,13 +57,22 @@ app.get('/api/songs', (req, res) => {
 
 })
 
+// //Listening GET for /api/songs
+// app.get('/api/songs/sort', (req, res) => {
+//     songModel.find((err,data) =>{
+//         res.json(data) 
+//     })
+
+// })
+
+
 app.get('/api/songs/:id', (req,res)=>{
     console.log(req.params.id);
-
     songModel.findById(req.params.id, (err,data) =>{
         res.json(data);
     })
 })
+
 
 app.put('/api/songs/:id', (req, res) => {
     console.log("Update song: " + req.params.id);
@@ -93,6 +104,9 @@ app.post('/api/songs', (req, res) => {
 })
 
 
+
+
+
 app.delete('/api/songs/:id', (req, res) => {
     console.log("Delete Song: " + req.params.id);
     songModel.findByIdAndDelete(req.params.id, (err, data) => {
@@ -100,6 +114,10 @@ app.delete('/api/songs/:id', (req, res) => {
     })
 })
 
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/../build/index.html'));
+    });
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

@@ -47,7 +47,6 @@ export class Edit extends React.Component {
     //This event prevents any button on the form being called multiple times unintentionally
     onSubmit(e) {
         e.preventDefault();
-        alert("Song: " + this.state.Title + this.state.Year +this.state.Type + this.state.Cover)
 
         //Creating an object which will contain the data being sent up to the server
         const newSong={
@@ -62,6 +61,8 @@ export class Edit extends React.Component {
         axios.put('http://localhost:4000/api/songs/'+this.state._id, newSong)
         .then(res =>{
             console.log(res.data)
+            // this.props.history.push('/read')
+            // this.props.ReloadPage();
         })
         .catch();
 

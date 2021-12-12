@@ -29,9 +29,9 @@ export class SongItem extends React.Component {
 
     render() {
         return (
-            <div >
+            <div>
                 {/* Structuring how to display the data */}
-                <Card >
+                <Card>
                     <Card.Header>{this.props.track.Title}</Card.Header>
                     <Card.Body>
                         <blockquote className="block content">
@@ -45,14 +45,11 @@ export class SongItem extends React.Component {
                     </Card.Body>
 
                     {/* Adding edit button and attaching to the /edit url */}
-                    <Link  to={"/edit/"+ this.props.track._id} className="btn btn-primary">Edit</Link>
+                    <Link to={"/edit/"+ this.props.track._id} className="btn btn-primary">Edit</Link>
 
                     {/* Adding the delete button and linking to function */}
-                    <Button  variant="danger" onClick={this.deleteSong}>Delete</Button>
-
-                    
+                    <Button variant="danger" onClick={this.deleteSong}>Delete</Button>
                 </Card>
-
             </div>
         );
     }

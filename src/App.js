@@ -29,19 +29,17 @@ class App extends Component {
           <Navbar bg="dark" variant="dark">
             
             {/* Naming navbar icon and assigning the URL to load when clicked */}
-            <Navbar.Brand href="/">Navbar</Navbar.Brand>
+            <Navbar.Brand href="/">
+            
+        Musicly</Navbar.Brand>
 
             {/* Naming each element in the navbar and assigning the URL to load when clicked */}
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/read">Read</Nav.Link>
-              <Nav.Link href="/create">Create</Nav.Link>
+              <Nav.Link href="/read">Music Library</Nav.Link>
+              <Nav.Link href="/create">Add New Track</Nav.Link>
             </Nav>
           </Navbar>
-
-          <br />
-          <br />
-
           {/* Routing specific components to load when a corresponding URL is loaded */}
           <Switch>
             <Route path='/' component={Content} exact />
