@@ -13,21 +13,18 @@ export class Create extends React.Component {
         this.onChangeType = this.onChangeType.bind(this);
         this.onChangeCover = this.onChangeCover.bind(this);
 
-
         //State (holder of data)
         this.state = {
             Title: '',
             Year: '',
             Type: '',
             Cover: ''
-
         }
     }
-    //This event prevents any button on the form being called multiple times unintentionally
+    //This method will be called when the submit button is pressed
     onSubmit(e) {
+        //This event prevents any button on the form being called multiple times unintentionally
         e.preventDefault();
-        
-
         //Creating an object which will contain the data being sent up to the server
         const newSong = {
             Title: this.state.Title,
@@ -37,15 +34,12 @@ export class Create extends React.Component {
         }
         //Posting the object up to the server
         axios.post('http://localhost:4000/api/songs', newSong)
-            .then((res) => {
-                console.log(res)
-                console.log(newSong)
+            .then(() => {
             })
-            .catch((err) => {
-                console.log(err)
+            .catch(() => {
+                this.props.history.push('/operationError')
             });
     }
-
     //This event will handle adding the inputted song name to the components state
     onChangeTitle(e) {
         this.setState({
@@ -77,7 +71,6 @@ export class Create extends React.Component {
                 <h1>Add a New Track to your Library</h1>
                 {/* Creating a form for adding a new song */}
                 <form onSubmit={this.onSubmit}>
-
                     {/* Creating the input field for the song name */}
                     <div className='form-group'>
                         <label>Add Song Name: </label>
@@ -86,7 +79,6 @@ export class Create extends React.Component {
                             value={this.state.Title}
                             onChange={this.onChangeTitle}></input>
                     </div>
-
                     {/* Creating the input field for the song year */}
                     <div className='form-group'>
                         <label>Add Song Year: </label>
@@ -95,7 +87,6 @@ export class Create extends React.Component {
                             value={this.state.Year}
                             onChange={this.onChangeYear}></input>
                     </div>
-
                     {/* Creating the input field for the song type */}
                     <div className='form-group'>
                         <label>Add Song Type: </label>
@@ -104,7 +95,6 @@ export class Create extends React.Component {
                             value={this.state.Type}
                             onChange={this.onChangeType}></input>
                     </div>
-
                     {/* Creating the input field for the song cover */}
                     <div className='form-group'>
                         <label>Add Song Cover Art (URL Link): </label>
@@ -113,7 +103,6 @@ export class Create extends React.Component {
                             value={this.state.Cover}
                             onChange={this.onChangeCover}></textarea>
                     </div>
-
                     {/* Creating the "Add Song" button */}
                     <div className='form-group'>
                         <input type='submit'

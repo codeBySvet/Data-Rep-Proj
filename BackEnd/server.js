@@ -1,15 +1,14 @@
+//Setup of server
 const express = require('express')
 const app = express()
 const port = 4000
 const mongoose = require('mongoose');
 
-
+//Required setup to run npm Build(combining server and front of page on the same localhost)
 const path = require('path');
 app.use(express.static(path.join(__dirname, '../build')));
 app.use('/static', express.static(path.join(__dirname, 'build//static')));
 
-//Body Parser is needed to parse through any given http POST body
-const bodyParser = require("body-parser");
 //Cors is needed because without it, we wont be able to request resources outside the server domain
 const cors = require('cors');
 app.use(cors());
@@ -21,6 +20,9 @@ app.use(function (req, res, next) {
     next();
 });
 
+//Body Parser is needed to parse through any given http POST body
+const bodyParser = require("body-parser");
+
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 //parse application/json
@@ -30,7 +32,7 @@ app.use(bodyParser.json())
 const myConnectionString = 'mongodb+srv://svetlinN:anshlom4321@projectdatabase.s7b7w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 main().catch(err => console.log(err));
 async function main() {
-  await mongoose.connect(myConnectionString);
+    await mongoose.connect(myConnectionString);
 }
 
 //Schema for the structure of the documents in the database
@@ -41,6 +43,7 @@ var songSchema = new Schema({
     Type: String,
     Cover: String
 })
+
 //Model - used when we want to interact with the database
 var songModel = mongoose.model("song", songSchema)
 
@@ -51,46 +54,43 @@ app.get('/', (req, res) => {
 
 //Listening GET for /api/songs
 app.get('/api/songs', (req, res) => {
-    songModel.find((err,data) =>{
-        res.json(data)
+    songModel.find((err, data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(data)
+        }
     })
-
 })
 
-// //Listening GET for /api/songs
-// app.get('/api/songs/sort', (req, res) => {
-//     songModel.find((err,data) =>{
-//         res.json(data) 
-//     })
-
-// })
-
-
+//Listening GET reqeust for a specific song
 app.get('/api/songs/:id', (req,res)=>{
     console.log(req.params.id);
     songModel.findById(req.params.id, (err,data) =>{
-        res.json(data);
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(data)
+        }
+        
     })
 })
 
-
+//Listening PUT(update) reqeust for a specific song
 app.put('/api/songs/:id', (req, res) => {
-    console.log("Update song: " + req.params.id);
-    console.log(req.body);
     songModel.findByIdAndUpdate(req.params.id, req.body, { new: true },
         (err, data) => {
-            res.send(data);
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(data);
+            }
         })
 })
 
 //Listening POST for /api/songs
 app.post('/api/songs', (req, res) => {
-    console.log('song recieved')
-    console.log(req.body.Title)
-    console.log(req.body.Year)
-    console.log(req.body.Type)
-    console.log(req.body.Cover)
-
+    //Models are responsible for creating and reading documents from the underlying MongoDB database.
     songModel.create({
         Title: req.body.Title,
         Year: req.body.Year,
@@ -102,23 +102,23 @@ app.post('/api/songs', (req, res) => {
     //multiple times by mistake
     res.send('Data Sent to Database!')
 })
-
-
-
-
-
+//Listening DELETE reqeust for a specific song
 app.delete('/api/songs/:id', (req, res) => {
-    console.log("Delete Song: " + req.params.id);
     songModel.findByIdAndDelete(req.params.id, (err, data) => {
-        res.send(data);
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(data);
+        }
     })
 })
 
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/../build/index.html'));
-    });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../build/index.html'));
+});
 
+//Port for listening
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })

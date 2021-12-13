@@ -1,21 +1,19 @@
 
 import './App.css';
 import React, { Component } from 'react';
-
 // Importing components which will be displayed on the page
 import { Content } from './components/content';
 import { Create } from './components/create';
 import { Read } from './components/read';
 import {Edit} from './components/edit';
+import operationError from './components/operationError';
+import NotFound from './components/NotFound';
 
 //Importing boostrap library for navbar
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav } from 'react-bootstrap';
-
 //Importing routing functionality to allow different components to be loaded in, depending on the URL
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-//---------------------------------------------------------------------------------------------------------------
 
 class App extends Component {
   render() {
@@ -23,16 +21,12 @@ class App extends Component {
 
       // Router tag here needs to wrap the entire div element (syntax requirement)
       <Router>
+        
         <div className="App">
-
           {/* Setting up navbar */}
           <Navbar bg="dark" variant="dark">
-            
             {/* Naming navbar icon and assigning the URL to load when clicked */}
-            <Navbar.Brand href="/">
-            
-        Musicly</Navbar.Brand>
-
+            <Navbar.Brand href="/">Musicly</Navbar.Brand>
             {/* Naming each element in the navbar and assigning the URL to load when clicked */}
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
@@ -40,12 +34,16 @@ class App extends Component {
               <Nav.Link href="/create">Add New Track</Nav.Link>
             </Nav>
           </Navbar>
+
           {/* Routing specific components to load when a corresponding URL is loaded */}
           <Switch>
             <Route path='/' component={Content} exact />
             <Route path='/read' component={Read} exact />
             <Route path='/create' component={Create} exact />
-            <Route path={"/edit/:id"} component={Edit}></Route>
+            <Route path={"/edit/:id"} component={Edit}exact/>
+            <Route path={"/operationError"} component={operationError}exact/>
+            {/* This final route will handle any unknwon routs (404 error) */}
+            <Route component={NotFound} />
           </Switch>
 
         </div>

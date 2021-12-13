@@ -1,10 +1,13 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
-export class Content extends React.Component {
 
+export class Content extends React.Component {
   render() {
     return (
       <div >
+
+        {/* Adding carousel to generate a slideshow on the front page */}
+        {/* Alsoincluding Images and corresponding links to each image */}
         <Carousel variant="dark">
           <Carousel.Item>
             <a href="https://accounts.spotify.com/en/login/?continue=https:%2F%2Fopen.spotify.com%2F__noul__%3Fl2l%3D1%26nd%3D1&_locale=en-IE">
@@ -38,11 +41,8 @@ export class Content extends React.Component {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-
         <h1><i><strong>Find the music you love. <br></br>Save it forever with us, and never again forget a song.</strong></i></h1>
-
       </div>
-
     );
 
   }
