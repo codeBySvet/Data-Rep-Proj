@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-//Render any time the URL path cannot be located
+//Render any time a function cannot be executed for any reason
 const operationError = () => (
   <div>
     <h1>Could not complete the request.</h1>

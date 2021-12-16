@@ -23,8 +23,10 @@ export class Read extends React.Component {
             this.setState({ songs: response.data})
             // this.redirect('/operationError546');
         })
-        .catch(()=>{
-            this.props.history.push('/operationError')
+        .catch((error)=>{
+
+            console.log(error)
+            //this.props.history.push('/operationError')
             
         });
     }
@@ -42,9 +44,7 @@ export class Read extends React.Component {
     render() {
         return (
             <div>
-
                 <h1>Music Library</h1>
-
                 {/* Calling songs.js component  */}
                 {/* Also passing it down the state data  */}
                 <Songs objectName={this.state.songs} ReloadPage={this.ReloadPage}> </Songs>

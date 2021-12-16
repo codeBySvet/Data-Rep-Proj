@@ -76,7 +76,6 @@ app.get('/api/songs/:id', (req,res)=>{
     })
 })
 
-
 //Listening PUT(update) reqeust for a specific song
 app.put('/api/songs/:id', (req, res) => {
     songModel.findByIdAndUpdate(req.params.id, req.body, { new: true },
@@ -89,8 +88,6 @@ app.put('/api/songs/:id', (req, res) => {
         })
 })
 
-
-
 //Listening POST for /api/songs
 app.post('/api/songs', (req, res) => {
     //Models are responsible for creating and reading documents from the underlying MongoDB database.
@@ -100,11 +97,11 @@ app.post('/api/songs', (req, res) => {
         Type: req.body.Type,
         Cover: req.body.Cover
     })
-
     //This sends a messaage back to ensure items added to the database are not added
     //multiple times by mistake
     res.send('Data Sent to Database!')
 })
+
 //Listening DELETE reqeust for a specific song
 app.delete('/api/songs/:id', (req, res) => {
     songModel.findByIdAndDelete(req.params.id, (err, data) => {

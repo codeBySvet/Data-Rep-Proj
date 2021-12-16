@@ -5,21 +5,18 @@ export class Edit extends React.Component {
 
     constructor() {
         super();
-
         //Binding the events to "this" instance of the controls
         this.onSubmit = this.onSubmit.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
         this.onChangeCover = this.onChangeCover.bind(this);
-
         //State (holder of data)
         this.state = {
             Title: '',
             Year: '',
             Type: '',
             Cover: ''
-
         }
     }
 
@@ -39,15 +36,13 @@ export class Edit extends React.Component {
                 })
             })
             .catch((err) => {
-                console.log(err)
-                //this.props.history.push('/operationError')
+                this.props.history.push('/operationError')
             });
     }
-
-    //This event prevents any button on the form being called multiple times unintentionally
+    //Method for form submission
     onSubmit(e) {
+        //This event prevents any button on the form being called multiple times unintentionally
         e.preventDefault();
-
         //Creating an object which will contain the data being sent up to the server
         const newSong = {
             _id: this.state._id,
@@ -59,6 +54,7 @@ export class Edit extends React.Component {
         //Calling axios to send a put request to the server with the new song details
         axios.put('http://localhost:4000/api/songs/' + this.state._id, newSong)
             .then(()=>{
+                this.props.history.push('/read')
             })
             .catch(()=>{
                 this.props.history.push('/operationError')

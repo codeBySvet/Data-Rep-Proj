@@ -35,6 +35,7 @@ export class Create extends React.Component {
         //Posting the object up to the server
         axios.post('http://localhost:4000/api/songs', newSong)
             .then(() => {
+                this.props.history.push('/read')
             })
             .catch(() => {
                 this.props.history.push('/operationError')
@@ -108,7 +109,7 @@ export class Create extends React.Component {
                         <input type='submit'
                             value='Add song'
                             className='btn btn-primary'></input>
-                    </div>
+                    </div>  
                 </form>
             </div>
         );
