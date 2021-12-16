@@ -31,7 +31,7 @@ export class Edit extends React.Component {
                     _id: response.data._id,
                     Title: response.data.Title,
                     Year: response.data.Year,
-                    Type: response.data.Year,
+                    Type: response.data.Type,
                     Cover: response.data.Cover
                 })
             })
