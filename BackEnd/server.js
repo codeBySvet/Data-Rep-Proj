@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 //Body Parser is needed to parse through any given http POST body
 const bodyParser = require("body-parser");
 
-//parse application/x-www-form-urlencoded
+//parse application
 app.use(bodyParser.urlencoded({ extended: false }))
 //parse application/json
 app.use(bodyParser.json())
@@ -76,6 +76,7 @@ app.get('/api/songs/:id', (req,res)=>{
     })
 })
 
+
 //Listening PUT(update) reqeust for a specific song
 app.put('/api/songs/:id', (req, res) => {
     songModel.findByIdAndUpdate(req.params.id, req.body, { new: true },
@@ -87,6 +88,8 @@ app.put('/api/songs/:id', (req, res) => {
             }
         })
 })
+
+
 
 //Listening POST for /api/songs
 app.post('/api/songs', (req, res) => {

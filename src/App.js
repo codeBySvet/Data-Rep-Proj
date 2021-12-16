@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Content } from './components/content';
 import { Create } from './components/create';
 import { Read } from './components/read';
-import {Edit} from './components/edit';
+import { Edit } from './components/edit';
 import operationError from './components/operationError';
 import NotFound from './components/NotFound';
 
@@ -15,13 +15,13 @@ import { Navbar, Nav } from 'react-bootstrap';
 //Importing routing functionality to allow different components to be loaded in, depending on the URL
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+
 class App extends Component {
   render() {
     return (
 
-      // Router tag here needs to wrap the entire div element (syntax requirement)
       <Router>
-        
+
         <div className="App">
           {/* Setting up navbar */}
           <Navbar bg="dark" variant="dark">
@@ -40,8 +40,9 @@ class App extends Component {
             <Route path='/' component={Content} exact />
             <Route path='/read' component={Read} exact />
             <Route path='/create' component={Create} exact />
-            <Route path={"/edit/:id"} component={Edit}exact/>
-            <Route path={"/operationError"} component={operationError}exact/>
+            <Route path={'/edit/:id'} component={Edit} exact />
+
+            <Route path={'/operationError'} component={operationError} exact />
             {/* This final route will handle any unknwon routs (404 error) */}
             <Route component={NotFound} />
           </Switch>

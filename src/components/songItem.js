@@ -40,7 +40,7 @@ export class SongItem extends React.Component {
                         </blockquote>
                     </Card.Body>
                     {/* Adding edit button and attaching to the edit component/URL */}
-                    <Link to={"/edit/" + this.props.track._id} className="btn btn-primary">Edit</Link>
+                    <Link to={"/edit/" + this.props.track._id} className="btn btn-warning">Edit</Link>
                     {/* Adding the delete button and linking to delete function */}
                     <Button variant="danger" onClick={this.deleteSong}>Delete</Button>
                 </Card>
