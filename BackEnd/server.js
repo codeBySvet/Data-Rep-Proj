@@ -47,16 +47,11 @@ var songSchema = new Schema({
 //Model - used when we want to interact with the database
 var songModel = mongoose.model("song", songSchema)
 
-//Listening GET for / (homepage)
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
 //Listening GET for /api/songs
 app.get('/api/songs', (req, res) => {
     songModel.find((err, data) => {
         if (err) {
-            res.send(err);
+            res.status(404).send('Sorry, cant find that' + err);
         } else {
             res.json(data)
         }
@@ -68,7 +63,7 @@ app.get('/api/songs/:id', (req,res)=>{
     console.log(req.params.id);
     songModel.findById(req.params.id, (err,data) =>{
         if (err) {
-            res.send(err);
+            res.status(404).send('Sorry, cant find that' + err);
         } else {
             res.json(data)
         }
@@ -81,9 +76,9 @@ app.put('/api/songs/:id', (req, res) => {
     songModel.findByIdAndUpdate(req.params.id, req.body, { new: true },
         (err, data) => {
             if (err) {
-                res.send(err);
+                res.status(404).send('Sorry, cant find that' + err);
             } else {
-                res.send(data);
+                res.status(200).send(data);
             }
         })
 })
@@ -106,9 +101,9 @@ app.post('/api/songs', (req, res) => {
 app.delete('/api/songs/:id', (req, res) => {
     songModel.findByIdAndDelete(req.params.id, (err, data) => {
         if (err) {
-            res.send(err);
+            res.status(404).send('Sorry, cant find that' + err);
         } else {
-            res.send(data);
+            res.status(200).send(data);
         }
     })
 })

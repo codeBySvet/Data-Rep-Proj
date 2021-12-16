@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
+
 //Render any time a function cannot be executed for any reason
 const operationError = () => (
   <div>
